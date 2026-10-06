@@ -1,0 +1,78 @@
+{
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/life-business-event/life-event/1": {
+    "it": "Iscrizione scuola/università e/o richiesta borsa di studio",
+    "en": "Enrolling in school/university and/or applying for a scholarship"
+  },
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/life-business-event/life-event/2": {
+    "it": "Invalidità",
+    "en": "Disability"
+  },
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/life-business-event/life-event/3": {
+    "it": "Ricerca di lavoro, avvio nuovo lavoro, disoccupazione",
+    "en": "Looking for a job, starting a new job, becoming unemployed"
+  },
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/life-business-event/life-event/4": {
+    "it": "Pensionamento",
+    "en": "Retirement"
+  },
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/life-business-event/life-event/5": {
+    "it": "Richiesta o rinnovo patente",
+    "en": "Applying for or renewing a driving licence"
+  },
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/life-business-event/life-event/6": {
+    "it": "Registrazione/possesso veicolo",
+    "en": "Registering or owning a vehicle"
+  },
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/life-business-event/life-event/7": {
+    "it": "Accesso al trasporto pubblico",
+    "en": "Access to public transport"
+  },
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/life-business-event/life-event/8": {
+    "it": "Compravendita/affitto casa/edifici/terreni, costruzione o ristrutturazione casa/edificio",
+    "en": "Buying, selling or renting a house/building/land; building or renovating a house/building"
+  },
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/life-business-event/life-event/9": {
+    "it": "Cambio di residenza/domicilio",
+    "en": "Changing residence/domicile"
+  },
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/life-business-event/life-event/10": {
+    "it": "Espatrio per lavoro, studio, pensionamento",
+    "en": "Going abroad for work, study or retirement"
+  },
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/life-business-event/life-event/11": {
+    "it": "Richiesta passaporto, visto e assistenza viaggi internazionali",
+    "en": "Applying for a passport, visa and assistance for international travel"
+  },
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/life-business-event/life-event/12": {
+    "it": "Nascita di un bambino, richiesta adozioni",
+    "en": "Birth of a child, applying for adoptions"
+  },
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/life-business-event/life-event/13": {
+    "it": "Matrimonio e/o cambio stato civile",
+    "en": "Marriage and/or changing civil status"
+  },
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/life-business-event/life-event/14": {
+    "it": "Morte ed eredità",
+    "en": "Death of a close relative and/or starting an inheritance procedure"
+  },
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/life-business-event/life-event/15": {
+    "it": "Prenotazione e disdetta visite/esami",
+    "en": "Booking and cancelling medical appointments/exams"
+  },
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/life-business-event/life-event/16": {
+    "it": "Denuncia crimini",
+    "en": "Reporting a crime"
+  },
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/life-business-event/life-event/17": {
+    "it": "Dichiarazione dei redditi, versamento e riscossione tributi/imposte e contributi",
+    "en": "Filing tax returns, paying and collecting taxes and contributions"
+  },
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/life-business-event/life-event/18": {
+    "it": "Accesso luoghi della cultura",
+    "en": "Access to cultural venues"
+  },
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/life-business-event/life-event/19": {
+    "it": "Possesso, cura, smarrimento animale da compagnia",
+    "en": "Owning, caring for or losing a pet"
+  }
+}

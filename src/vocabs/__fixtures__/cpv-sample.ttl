@@ -1,0 +1,34 @@
+@prefix : <https://w3id.org/italia/onto/CPV/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+
+###  https://w3id.org/italia/onto/CPV/familyName
+:familyName rdf:type owl:DatatypeProperty ;
+            rdfs:domain :Person ;
+            rdfs:range xsd:string ;
+            rdfs:label "cognome"@it ,
+                       "family name"@en .
+
+
+###  https://w3id.org/italia/onto/CPV/givenName
+:givenName rdf:type owl:DatatypeProperty ;
+           rdfs:domain :Person ;
+           rdfs:range xsd:string ;
+           rdfs:label "given name"@en ,
+                      "nome proprio"@it .
+
+
+###  https://w3id.org/italia/onto/CPV/taxCode
+:taxCode rdf:type owl:DatatypeProperty ;
+         rdfs:domain :Person ;
+         rdfs:range rdfs:Literal ;
+         rdfs:label "codice fiscale"@it ,
+                    "tax code"@en .
+
+
+###  https://w3id.org/italia/onto/CPV/Person
+:Person rdf:type owl:Class ;
+        rdfs:label "Persona"@it ,
+                   "Person"@en .

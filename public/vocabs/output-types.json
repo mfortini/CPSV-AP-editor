@@ -1,0 +1,34 @@
+{
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/service-input-output/CERT": {
+    "it": "Certificazione",
+    "en": "Certification"
+  },
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/service-input-output/AUTHACT": {
+    "it": "Atto autorizzativo",
+    "en": "Authorisation act"
+  },
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/service-input-output/ADMINDOC": {
+    "it": "Documentazione amministrativa",
+    "en": "Administrative documentation"
+  },
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/service-input-output/PAYMENTDEC": {
+    "it": "Attestazione di pagamento",
+    "en": "Payment attestation"
+  },
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/service-input-output/CODE": {
+    "it": "Codice",
+    "en": "Code"
+  },
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/service-input-output/IDDEC": {
+    "it": "Attestazione di identità",
+    "en": "Identity attestation"
+  },
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/service-input-output/REQ": {
+    "it": "Istanza/richiesta",
+    "en": "Application/request"
+  },
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/service-input-output/OTHDOC": {
+    "it": "Altra documentazione",
+    "en": "Other documentation"
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/public-services-subject-matters/1": {
+    "it": "Istruzione e formazione",
+    "en": "Education and training"
+  },
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/public-services-subject-matters/2": {
+    "it": "Salute",
+    "en": "Health"
+  },
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/public-services-subject-matters/3": {
+    "it": "Lavoro e occupazione",
+    "en": "Work and employment"
+  },
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/public-services-subject-matters/4": {
+    "it": "Previdenza e assistenza",
+    "en": "Social security and welfare"
+  },
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/public-services-subject-matters/5": {
+    "it": "Mobilità e trasporti",
+    "en": "Mobility and transport"
+  },
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/public-services-subject-matters/6": {
+    "it": "Veicoli e motorizzazione",
+    "en": "Vehicles and vehicle registration"
+  },
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/public-services-subject-matters/7": {
+    "it": "Trasporto pubblico",
+    "en": "Public transport"
+  },
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/public-services-subject-matters/8": {
+    "it": "Casa e territorio",
+    "en": "Housing and territory"
+  },
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/public-services-subject-matters/9": {
+    "it": "Anagrafe e residenza",
+    "en": "Civil registry and residence"
+  },
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/public-services-subject-matters/10": {
+    "it": "Estero e mobilità internazionale",
+    "en": "Abroad and international mobility"
+  },
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/public-services-subject-matters/11": {
+    "it": "Documenti di viaggio",
+    "en": "Travel documents"
+  },
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/public-services-subject-matters/12": {
+    "it": "Famiglia e nascite",
+    "en": "Family and births"
+  },
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/public-services-subject-matters/13": {
+    "it": "Stato civile",
+    "en": "Civil status"
+  },
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/public-services-subject-matters/14": {
+    "it": "Successioni",
+    "en": "Inheritance"
+  },
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/public-services-subject-matters/15": {
+    "it": "Sanità e prestazioni",
+    "en": "Healthcare and benefits"
+  },
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/public-services-subject-matters/16": {
+    "it": "Sicurezza e denunce",
+    "en": "Security and crime reports"
+  },
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/public-services-subject-matters/17": {
+    "it": "Fisco e tributi",
+    "en": "Tax and duties"
+  },
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/public-services-subject-matters/18": {
+    "it": "Cultura e turismo",
+    "en": "Culture and tourism"
+  },
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/public-services-subject-matters/19": {
+    "it": "Animali",
+    "en": "Animals"
+  },
+  "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/public-services-subject-matters/20": {
+    "it": "Altro",
+    "en": "Other"
+  }
+}
