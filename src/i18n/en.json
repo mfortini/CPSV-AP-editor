@@ -1,8 +1,23 @@
 {
   "app": {
     "title": "CPSV service sheet editor",
-    "subtitle": "Author and share a public service sheet as JSON-LD (CPSV-AP_IT).",
+    "subtitle": "Author and share a public service sheet as JSON-LD (CPSV-AP).",
     "skip": "Skip to content"
+  },
+  "explain": {
+    "back": "Back to the editor",
+    "title": "The same sheet for every service",
+    "lead": "CPSV-AP is how public services are described with the same fields, and how those sheets can work together when inputs and outputs name the same thing.",
+    "uniformTitle": "Uniform documentation",
+    "uniformBody": "Every service is described the same way: who provides it, who it is for, what it asks for, what it returns, time, cost, channels, life event and theme. Sheets can be compared and published as JSON-LD, instead of a different text from each authority.",
+    "interopTitle": "Interoperability",
+    "interopBody": "Today an input name is free text, for example “driving licence”, and the type is a broad class such as an identity attestation. If inputs and outputs pointed to a stable concept, the sheet would say not only what is needed, but where it can come from.",
+    "interopWallet": "The driving licence document is presented from the wallet.",
+    "interopApi": "Or it is retrieved from an API, for example the vehicle authority’s, without asking the citizen again.",
+    "interopOut": "The same chain works in the other direction: a semantic output is a document another service can consume.",
+    "oasTitle": "The concept in the OpenAPI specification",
+    "oasBody": "Whoever publishes an API can declare, in the OpenAPI specification, the concept that API makes available. The service sheet and the API contract name the same thing. Whoever exposes wallet credentials, for example, points at the same driving-licence concept: another service recognises it and knows it can ask the wallet or call that API, without a separate agreement for every pair of authorities.",
+    "note": "This is a consequence of the model, not a feature already present in this editor."
   },
   "nav": {
     "section": "Views",

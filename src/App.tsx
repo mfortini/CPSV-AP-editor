@@ -25,7 +25,9 @@ import {
 } from "design-react-kit";
 import { StoreProvider, useStore } from "./app/store";
 import type { AppView } from "./domain/types";
+import { isExplainSearch, withoutExplainSearch } from "./persist/explainPage";
 import { EditorView } from "./views/EditorView";
+import { ExplainView } from "./views/ExplainView";
 import { SheetPreview } from "./views/SheetPreview";
 import { GraphView } from "./views/GraphView";
 import { SourceView } from "./views/SourceView";
@@ -40,6 +42,7 @@ function AppShell() {
   const [pasteOpen, setPasteOpen] = useState(false);
   const [pasteText, setPasteText] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [explain, setExplain] = useState(() => isExplainSearch(window.location.search));
   const {
     view,
     setView,
@@ -59,6 +62,17 @@ function AppShell() {
     urlTooLarge,
     compressedSize,
   } = useStore();
+
+  useEffect(() => {
+    const sync = () => setExplain(isExplainSearch(window.location.search));
+    window.addEventListener("popstate", sync);
+    return () => window.removeEventListener("popstate", sync);
+  }, []);
+
+  function leaveExplain() {
+    window.history.pushState(null, "", withoutExplainSearch(window.location.href));
+    setExplain(false);
+  }
 
   useEffect(() => {
     if (!toast) return;
@@ -202,7 +216,8 @@ function AppShell() {
         }}
       />
 
-      <div className="app-shell">
+      <div className={explain ? "app-shell app-shell--explain" : "app-shell"}>
+        {explain ? null : (
         <aside className="app-sidebar" aria-label={t("nav.section")}>
           <Sidebar left>
             <div className="app-sidebar__inner">
@@ -240,9 +255,10 @@ function AppShell() {
             ))}
           </select>
         </aside>
+        )}
 
         <div className="app-content">
-          {urlTooLarge && (
+          {!explain && urlTooLarge && (
             <Container className="pt-3">
               <div className="alert alert-warning mb-0" role="status">
                 {t("url.limitWarning", { size: compressedSize ?? "—" })}
@@ -250,16 +266,17 @@ function AppShell() {
             </Container>
           )}
           <main id="main">
-            {view === "editor" && <EditorView />}
-            {view === "scheda" && (
+            {explain ? <ExplainView onBack={leaveExplain} /> : null}
+            {!explain && view === "editor" && <EditorView />}
+            {!explain && view === "scheda" && (
               <Container className="py-4">
                 <h2 className="h3 mb-3">{t("preview.heading")}</h2>
                 <SheetPreview />
               </Container>
             )}
-            {view === "grafo" && <GraphView />}
-            {view === "sorgente" && <SourceView />}
-            {view === "vocabolari" && <VocabsView />}
+            {!explain && view === "grafo" && <GraphView />}
+            {!explain && view === "sorgente" && <SourceView />}
+            {!explain && view === "vocabolari" && <VocabsView />}
           </main>
         </div>
       </div>

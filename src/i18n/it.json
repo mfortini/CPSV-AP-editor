@@ -1,8 +1,23 @@
 {
   "app": {
     "title": "Editor scheda CPSV",
-    "subtitle": "Compila e condividi una scheda di servizio pubblico in JSON-LD (CPSV-AP_IT).",
+    "subtitle": "Compila e condividi una scheda di servizio pubblico in JSON-LD (CPSV-AP).",
     "skip": "Vai al contenuto"
+  },
+  "explain": {
+    "back": "Torna all’editor",
+    "title": "Una scheda uguale per ogni servizio",
+    "lead": "CPSV-AP è il modo per descrivere i servizi pubblici con gli stessi campi, e per fare in modo che quelle schede si parlino quando input e output indicano la stessa cosa.",
+    "uniformTitle": "Documentazione uniforme",
+    "uniformBody": "Ogni servizio si descrive allo stesso modo: chi lo eroga, a chi è rivolto, cosa chiede, cosa restituisce, tempi, costi, canali, evento della vita e tema. Le schede si confrontano e si pubblicano come JSON-LD, non come testi diversi scritti da ogni ente.",
+    "interopTitle": "Interoperabilità",
+    "interopBody": "Oggi il nome di un input è testo libero, per esempio «patente», e il tipo è una classe generica come l’attestazione di identità. Se input e output puntassero a un concetto stabile, la scheda direbbe non solo che cosa serve, ma da dove può arrivare.",
+    "interopWallet": "Il documento di patente si presenta dal wallet.",
+    "interopApi": "Oppure si recupera da un’API, per esempio della motorizzazione, senza chiederlo di nuovo al cittadino.",
+    "interopOut": "La stessa catena vale in uscita: un output semantico è un documento che un altro servizio può consumare.",
+    "oasTitle": "Il concetto nella specifica OpenAPI",
+    "oasBody": "Chi pubblica un’API può dichiarare, nella specifica OpenAPI, il concetto che quell’API mette a disposizione. La scheda del servizio e il contratto dell’API nominano la stessa cosa. Chi espone credenziali per il wallet, per esempio, indica lo stesso concetto della patente: un altro servizio lo riconosce e sa che può chiederlo al wallet oppure chiamare quell’API, senza un accordo separato per ogni coppia di enti.",
+    "note": "È una conseguenza del modello, non una funzione già presente in questo editor."
   },
   "nav": {
     "section": "Viste",

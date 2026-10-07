@@ -95,8 +95,103 @@
   display: none;
 }
 
+.app-shell--explain {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 .app-content {
   min-width: 0;
+}
+
+.explain {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+  color: var(--cpsv-ink);
+}
+
+.explain__back {
+  margin: 0 0 1.5rem;
+}
+
+.explain__back a {
+  color: var(--cpsv-primary);
+  font-weight: 600;
+}
+
+.explain h1 {
+  font-size: 2rem;
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+}
+
+.explain__lead {
+  font-size: 1.125rem;
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+}
+
+.explain__section {
+  background: var(--cpsv-panel);
+  border: 1px solid var(--cpsv-line);
+  border-radius: 0.5rem;
+  padding: 1.25rem 1.5rem 1.4rem;
+  margin-top: 1.25rem;
+}
+
+.explain__section h2 {
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.explain__section p,
+.explain__note {
+  line-height: 1.55;
+  margin-bottom: 0;
+}
+
+.explain__section p + p,
+.explain__chain + p {
+  margin-top: 0.9rem;
+}
+
+.explain__chain {
+  display: grid;
+  gap: 0.75rem;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: explain;
+}
+
+.explain__chain li {
+  counter-increment: explain;
+  background: var(--cpsv-surface);
+  border-radius: 0.4rem;
+  padding: 0.75rem 0.9rem 0.75rem 2.6rem;
+  position: relative;
+  line-height: 1.45;
+}
+
+.explain__chain li::before {
+  content: counter(explain);
+  position: absolute;
+  left: 0.75rem;
+  top: 0.75rem;
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 50%;
+  background: var(--cpsv-primary);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+}
+
+.explain__note {
+  margin-top: 1.5rem;
+  color: var(--cpsv-muted);
 }
 
 main {
