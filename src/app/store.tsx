@@ -20,7 +20,13 @@ import {
   serviceSlice,
   validateDraft,
 } from "../domain";
-import type { AppLang, AppView, Draft, JsonLdDocument } from "../domain/types";
+import type {
+  AppLang,
+  AppView,
+  Draft,
+  JsonLdDocument,
+  SuggestionField,
+} from "../domain/types";
 import {
   DOC_SOFT_LIMIT,
   compressJson,
@@ -56,7 +62,7 @@ type Store = {
   exportSheet: () => void;
   copySheet: () => Promise<void>;
   openPlayground: () => void;
-  suggestStructure: () => { changed: number };
+  suggestStructure: () => { changed: number; fields: SuggestionField[] };
 };
 
 const StoreContext = createContext<Store | null>(null);
@@ -256,7 +262,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const suggestStructure = useCallback(() => {
     const result = applySuggestions(draft);
     setDraft(result.draft);
-    return { changed: result.changed };
+    return { changed: result.changed, fields: result.fields };
   }, [draft, setDraft]);
 
   // Boot: vocabs + hash + legacy query

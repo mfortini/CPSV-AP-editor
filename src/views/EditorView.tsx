@@ -16,7 +16,6 @@ import { emptyTypedItem, locHasContent, pickLoc } from "../domain";
 import { suggestOrgId } from "../domain/schedaSuggest";
 import type { Draft, TypedItem, VocabEntry } from "../domain/types";
 import { ConceptPicker } from "../vocabs/ConceptPicker";
-import type { ConceptsSource } from "../vocabs/load";
 import { LocalizedField } from "./LocalizedField";
 
 const DURATION_KIND_VALUES = ["", "immediate", "hours", "days", "weeks", "months"] as const;
@@ -64,26 +63,45 @@ function FormSection({
   );
 }
 
+function SuggestStructure() {
+  const { t } = useTranslation();
+  const { suggestStructure, showToast } = useStore();
+  return (
+    <div className="mb-4">
+      <Button
+        color="primary"
+        outline
+        size="sm"
+        onClick={() => {
+          const { changed, fields } = suggestStructure();
+          showToast(
+            changed
+              ? t("toast.suggestOk", {
+                  fields: fields.map((field) => t(`toast.suggestField.${field}`)).join(", "),
+                })
+              : t("toast.suggestNone"),
+          );
+        }}
+      >
+        {t("actions.suggest")}
+      </Button>
+      <p className="form-section__hint mt-2 mb-0">{t("form.suggestHint")}</p>
+    </div>
+  );
+}
+
 function TypedListEditor({
   kind,
   items,
   typeEntries,
-  conceptEntries,
-  conceptsSource,
   onChange,
 }: {
   kind: "inputs" | "outputs";
   items: TypedItem[];
   typeEntries: VocabEntry[];
-  conceptEntries: VocabEntry[];
-  conceptsSource: ConceptsSource;
   onChange: (items: TypedItem[]) => void;
 }) {
   const { t } = useTranslation();
-  const conceptsSourceNote =
-    conceptsSource === "local"
-      ? t("vocabs.conceptsSourceLocal")
-      : t(`vocabs.conceptsSource.${conceptsSource}`);
 
   return (
     <div className="d-flex flex-column">
@@ -118,23 +136,6 @@ function TypedListEditor({
               onChange(next);
             }}
           />
-          {conceptEntries.length > 0 && (
-            <ConceptPicker
-              id={`${kind}-concept-${index}`}
-              label={t("form.concept")}
-              hint={t("form.conceptHint")}
-              sourceNote={conceptsSourceNote}
-              vocabName={t("vocabs.concepts")}
-              entries={conceptEntries}
-              value={item.conceptId ? [item.conceptId] : []}
-              multiple={false}
-              onChange={(ids) => {
-                const next = [...items];
-                next[index] = { ...item, conceptId: ids[0] || "" };
-                onChange(next);
-              }}
-            />
-          )}
           <Button
             color="danger"
             outline
@@ -155,7 +156,7 @@ function TypedListEditor({
 
 export function EditorView() {
   const { t } = useTranslation();
-  const { draft, setDraft, vocabs, errors, suggestStructure, showToast } = useStore();
+  const { draft, setDraft, vocabs, errors } = useStore();
   const [tab, setTab] = useState<EditorTab>("identity");
 
   function patch(partial: Partial<Draft>) {
@@ -279,23 +280,6 @@ export function EditorView() {
 
       {tab === "audience" && (
         <FormSection title={t("form.audience")} hint={t("editorTab.audienceHint")}>
-          <div className="mb-4">
-            <Button
-              color="primary"
-              outline
-              size="sm"
-              onClick={() => {
-                const { changed } = suggestStructure();
-                showToast(
-                  changed
-                    ? t("toast.suggestOk", { count: changed })
-                    : t("toast.suggestNone"),
-                );
-              }}
-            >
-              {t("actions.suggest")}
-            </Button>
-          </div>
           <LocalizedField
             id="audience"
             label={t("form.audience")}
@@ -309,29 +293,11 @@ export function EditorView() {
 
       {tab === "inputs" && (
         <FormSection title={t("form.inputs")} hint={t("editorTab.inputsHint")}>
-          <div className="mb-4">
-            <Button
-              color="primary"
-              outline
-              size="sm"
-              onClick={() => {
-                const { changed } = suggestStructure();
-                showToast(
-                  changed
-                    ? t("toast.suggestOk", { count: changed })
-                    : t("toast.suggestNone"),
-                );
-              }}
-            >
-              {t("actions.suggest")}
-            </Button>
-          </div>
+          <SuggestStructure />
           <TypedListEditor
             kind="inputs"
             items={draft.inputs}
             typeEntries={vocabs.inputTypes}
-            conceptEntries={vocabs.concepts}
-            conceptsSource={vocabs.conceptsSource}
             onChange={(inputs) => patch({ inputs })}
           />
           <Button
@@ -349,29 +315,11 @@ export function EditorView() {
 
       {tab === "outputs" && (
         <FormSection title={t("form.outputs")} hint={t("editorTab.outputsHint")}>
-          <div className="mb-4">
-            <Button
-              color="primary"
-              outline
-              size="sm"
-              onClick={() => {
-                const { changed } = suggestStructure();
-                showToast(
-                  changed
-                    ? t("toast.suggestOk", { count: changed })
-                    : t("toast.suggestNone"),
-                );
-              }}
-            >
-              {t("actions.suggest")}
-            </Button>
-          </div>
+          <SuggestStructure />
           <TypedListEditor
             kind="outputs"
             items={draft.outputs}
             typeEntries={vocabs.outputTypes}
-            conceptEntries={vocabs.concepts}
-            conceptsSource={vocabs.conceptsSource}
             onChange={(outputs) => patch({ outputs })}
           />
           <Button
@@ -389,23 +337,7 @@ export function EditorView() {
 
       {tab === "timing" && (
         <FormSection title={t("editorTab.timing")} hint={t("editorTab.timingHint")}>
-          <div className="mb-4">
-            <Button
-              color="primary"
-              outline
-              size="sm"
-              onClick={() => {
-                const { changed } = suggestStructure();
-                showToast(
-                  changed
-                    ? t("toast.suggestOk", { count: changed })
-                    : t("toast.suggestNone"),
-                );
-              }}
-            >
-              {t("actions.suggest")}
-            </Button>
-          </div>
+          <SuggestStructure />
           <LocalizedField
             id="processingTime"
             label={t("form.processingText")}

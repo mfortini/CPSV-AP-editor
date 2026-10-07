@@ -6,7 +6,7 @@ SPA statica (React + Vite + Bootstrap Italia / Design React Kit) per compilare, 
 
 - Form guidato ↔ JSON-LD (`formToDocument` / `documentToForm`)
 - Anteprima scheda, grafo del servizio, sorgente JSON-LD (CodeMirror)
-- Vocabolari controllati cercabili (eventi della vita, temi, tipi I/O, concetti)
+- Vocabolari controllati cercabili (eventi della vita, temi, tipi I/O)
 - Suggerimenti strutturali da testo libero
 - **Condivisione via URL fragment**: `#lang=it&view=editor&doc=<gzip-base64url>`
 - Apertura sul [JSON-LD Playground](https://json-ld.org/playground/)

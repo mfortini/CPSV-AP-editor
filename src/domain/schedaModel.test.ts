@@ -27,7 +27,6 @@ describe("scheda model", () => {
         {
           text: { it: "Documento di identità", en: "Identity document" },
           typeId: "",
-          conceptId: "",
         },
       ],
       lifeEvents: [
@@ -92,7 +91,6 @@ describe("scheda model", () => {
         {
           text: { it: "Codice fiscale del richiedente", en: "" },
           typeId: "",
-          conceptId: "",
         },
       ],
       processingTime: {
@@ -108,6 +106,38 @@ describe("scheda model", () => {
     expect(next.inputs[0].typeId).toBeTruthy();
     expect(next.processingTime.kind).toBe("days");
     expect(next.cost.amount).toBe(0);
+  });
+
+  it("drops cv:supportsConcept on import", () => {
+    const back = documentToForm(
+      parseJsonLdText(
+        JSON.stringify({
+          "@context": {},
+          "@graph": [
+            {
+              "@id": "https://example.org/s/",
+              "@type": "cpsv:PublicService",
+              "dct:title": { "@language": "it", "@value": "Servizio" },
+              "cpsv:hasInput": { "@id": "https://example.org/s/#input-0" },
+            },
+            {
+              "@id": "https://example.org/s/#input-0",
+              "@type": "cpsv:Input",
+              "dct:description": { "@language": "it", "@value": "Codice fiscale" },
+              "dct:type": {
+                "@id": "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/service-input-output/CODE",
+              },
+              "cv:supportsConcept": {
+                "@id": "https://w3id.org/italia/onto/CPV/taxCode",
+              },
+            },
+          ],
+        }),
+      ),
+    );
+    expect(back.inputs[0].text.it).toBe("Codice fiscale");
+    expect(back.inputs[0].typeId).toContain("/CODE");
+    expect(JSON.stringify(formToDocument(back))).not.toContain("supportsConcept");
   });
 
   it("normalizes legacy string fields", () => {

@@ -12,19 +12,13 @@ import { useStore } from "../app/store";
 import type { VocabEntry } from "../domain/types";
 import { vocabLabel } from "../vocabs/load";
 
-type VocabKey =
-  | "lifeEvents"
-  | "themes"
-  | "inputTypes"
-  | "outputTypes"
-  | "concepts";
+type VocabKey = "lifeEvents" | "themes" | "inputTypes" | "outputTypes";
 
 const VOCAB_KEYS: VocabKey[] = [
   "lifeEvents",
   "themes",
   "inputTypes",
   "outputTypes",
-  "concepts",
 ];
 
 export function VocabsView() {
@@ -37,12 +31,6 @@ export function VocabsView() {
     if (!vocabs) return [] as VocabEntry[];
     return vocabs[tab] || [];
   }, [vocabs, tab]);
-
-  const conceptsSourceNote = useMemo(() => {
-    if (!vocabs) return "";
-    if (vocabs.conceptsSource === "local") return t("vocabs.conceptsSourceLocal");
-    return t(`vocabs.conceptsSource.${vocabs.conceptsSource}`);
-  }, [t, vocabs]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLocaleLowerCase(lang);
@@ -96,11 +84,6 @@ export function VocabsView() {
       <section className="form-section">
         <h3 className="form-section__title">{t(`vocabs.${tab}`)}</h3>
         <p className="form-section__hint">{t(`vocabs.${tab}Hint`)}</p>
-        {tab === "concepts" ? (
-          <p className="concept-picker__source" role="status">
-            {conceptsSourceNote}
-          </p>
-        ) : null}
         <Input
           id="vocab-search"
           type="search"

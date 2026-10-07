@@ -212,7 +212,7 @@ export function formatDurationLabel(duration) {
 }
 
 export function emptyTypedItem() {
-  return { text: emptyLoc(), typeId: "", conceptId: "" };
+  return { text: emptyLoc(), typeId: "" };
 }
 
 export function emptyProcessingTime() {
@@ -250,12 +250,11 @@ function normalizeTypedList(values) {
   const list = Array.isArray(values) ? values : [];
   const mapped = list.map((item) => {
     if (typeof item === "string") {
-      return { text: normalizeLoc(item), typeId: "", conceptId: "" };
+      return { text: normalizeLoc(item), typeId: "" };
     }
     return {
       text: normalizeLoc(item?.text),
       typeId: String(item?.typeId || "").trim(),
-      conceptId: String(item?.conceptId || "").trim(),
     };
   });
   return mapped.length ? mapped : [emptyTypedItem()];
@@ -342,20 +341,14 @@ export function draftHasContent(draft) {
   }
   if (
     (d.inputs || []).some(
-      (v) =>
-        locHasContent(v.text) ||
-        String(v.typeId || "").trim() ||
-        String(v.conceptId || "").trim(),
+      (v) => locHasContent(v.text) || String(v.typeId || "").trim(),
     )
   ) {
     return true;
   }
   if (
     (d.outputs || []).some(
-      (v) =>
-        locHasContent(v.text) ||
-        String(v.typeId || "").trim() ||
-        String(v.conceptId || "").trim(),
+      (v) => locHasContent(v.text) || String(v.typeId || "").trim(),
     )
   ) {
     return true;
@@ -395,10 +388,7 @@ function compactTexts(values) {
 
 function compactTypedItems(values) {
   return normalizeTypedList(values).filter(
-    (item) =>
-      locHasContent(item.text) ||
-      String(item.typeId || "").trim() ||
-      String(item.conceptId || "").trim(),
+    (item) => locHasContent(item.text) || String(item.typeId || "").trim(),
   );
 }
 
@@ -434,9 +424,8 @@ function typedItemsFromRefs(graph, refs) {
         mergeLoc(readLoc(node?.["dct:title"]), readLoc(node?.["rdfs:comment"])),
       );
       const typeId = refId(node?.["dct:type"]) || "";
-      const conceptId = refId(node?.["cv:supportsConcept"]) || "";
-      if (!locHasContent(text) && !typeId && !conceptId) return null;
-      return { text, typeId, conceptId };
+      if (!locHasContent(text) && !typeId) return null;
+      return { text, typeId };
     })
     .filter(Boolean);
 }
@@ -498,7 +487,6 @@ export function formToDocument(draft) {
       const desc = litLang(item.text);
       if (desc) node["dct:description"] = desc;
       if (item.typeId) node["dct:type"] = { "@id": item.typeId };
-      if (item.conceptId) node["cv:supportsConcept"] = { "@id": item.conceptId };
       graph.push(node);
       return { "@id": id };
     });
@@ -516,7 +504,6 @@ export function formToDocument(draft) {
       const desc = litLang(item.text);
       if (desc) node["dct:description"] = desc;
       if (item.typeId) node["dct:type"] = { "@id": item.typeId };
-      if (item.conceptId) node["cv:supportsConcept"] = { "@id": item.conceptId };
       graph.push(node);
       return { "@id": id };
     });

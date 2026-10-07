@@ -9,8 +9,9 @@ export type LocalizedString = {
 export type TypedItem = {
   text: LocalizedString;
   typeId: string;
-  conceptId: string;
 };
+
+export type SuggestionField = "inputType" | "outputType" | "duration" | "cost" | "orgId";
 
 export type ProcessingTime = {
   text: LocalizedString;

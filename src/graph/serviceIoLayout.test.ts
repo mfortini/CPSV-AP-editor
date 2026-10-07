@@ -99,7 +99,7 @@ describe("serviceIoLayout", () => {
     expect(service.lines.length).toBeGreaterThan(1);
   });
 
-  it("shows type and CPV concept names on I/O cards", () => {
+  it("shows document type names on I/O cards", () => {
     const layout = buildServiceIoLayout(
       {
         "@graph": [
@@ -118,9 +118,6 @@ describe("serviceIoLayout", () => {
             },
             "dct:type": {
               "@id": "https://w3id.org/italia/controlled-vocabulary/classifications-for-public-services/service-input-output/ADMINDOC",
-            },
-            "cv:supportsConcept": {
-              "@id": "https://w3id.org/italia/onto/CPV/taxCode",
             },
           },
           {
@@ -147,18 +144,12 @@ describe("serviceIoLayout", () => {
             labels: { it: "Certificato", en: "Certificate" },
           },
         ],
-        concepts: [
-          {
-            id: "https://w3id.org/italia/onto/CPV/taxCode",
-            labels: { it: "codice fiscale", en: "tax code" },
-          },
-        ],
       },
     );
 
     const input = layout.nodes.find((n) => n.lane === "input")!;
     const output = layout.nodes.find((n) => n.lane === "output")!;
-    expect(input.heading).toBe("Documento amministrativo · codice fiscale");
+    expect(input.heading).toBe("Documento amministrativo");
     expect(input.headingLines[0]).toContain("Documento");
     expect(input.lines.join(" ")).toContain("estratto");
     expect(output.heading).toBe("Certificato");

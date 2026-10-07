@@ -1,18 +1,10 @@
 import type { AppLang, VocabEntry, VocabLabels } from "../domain/types";
-import {
-  loadConceptsRemote,
-  type ConceptsSource,
-} from "./sparqlConcepts";
-
-export type { ConceptsSource };
 
 export type VocabBundle = {
   lifeEvents: VocabEntry[];
   themes: VocabEntry[];
   inputTypes: VocabEntry[];
   outputTypes: VocabEntry[];
-  concepts: VocabEntry[];
-  conceptsSource: ConceptsSource;
 };
 
 type RawVocabMap = Record<string, string | VocabLabels>;
@@ -54,20 +46,16 @@ async function loadMap(path: string): Promise<VocabEntry[]> {
 }
 
 export async function loadVocabs(): Promise<VocabBundle> {
-  const [lifeEvents, themes, inputTypes, outputTypes, conceptsResult] =
-    await Promise.all([
-      loadMap("./vocabs/life-events.json"),
-      loadMap("./vocabs/themes.json"),
-      loadMap("./vocabs/input-types.json"),
-      loadMap("./vocabs/output-types.json"),
-      loadConceptsRemote(),
-    ]);
+  const [lifeEvents, themes, inputTypes, outputTypes] = await Promise.all([
+    loadMap("./vocabs/life-events.json"),
+    loadMap("./vocabs/themes.json"),
+    loadMap("./vocabs/input-types.json"),
+    loadMap("./vocabs/output-types.json"),
+  ]);
   return {
     lifeEvents,
     themes,
     inputTypes,
     outputTypes,
-    concepts: conceptsResult.entries,
-    conceptsSource: conceptsResult.source,
   };
 }

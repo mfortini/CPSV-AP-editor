@@ -35,28 +35,9 @@ const OUTPUT_RULES = [
   { typeId: `${IO}/OTHDOC`, re: /document|scaric|pdf|esito|pratica/i },
 ];
 
-/** Allowlist concetti OntoPiA (allineata a structure/typed.py). */
-const CONCEPT_RULES = [
-  {
-    conceptId: "https://w3id.org/italia/onto/CPV/taxCode",
-    re: /codice\s+fiscale|\bcf\b/i,
-  },
-];
-
-function itemText(item) {
-  if (item == null) return "";
-  if (typeof item === "string") return item;
-  return pickLoc(normalizeLoc(item.text));
-}
-
 function itemTypeId(item) {
   if (!item || typeof item === "string") return "";
   return String(item.typeId || "").trim();
-}
-
-function itemConceptId(item) {
-  if (!item || typeof item === "string") return "";
-  return String(item.conceptId || "").trim();
 }
 
 export function suggestInputType(text) {
@@ -71,14 +52,6 @@ export function suggestOutputType(text) {
   const t = String(text || "");
   for (const rule of OUTPUT_RULES) {
     if (rule.re.test(t)) return rule.typeId;
-  }
-  return "";
-}
-
-export function suggestConcept(text) {
-  const t = String(text || "");
-  for (const rule of CONCEPT_RULES) {
-    if (rule.re.test(t)) return rule.conceptId;
   }
   return "";
 }
@@ -269,68 +242,51 @@ export function suggestDuration(text) {
 
 /**
  * Applica suggerimenti solo agli slot tipizzati vuoti.
- * @returns {{ draft: object, changed: number }}
+ * @returns {{ draft: object, changed: number, fields: string[] }}
  */
 export function applySuggestions(draft) {
   const next = structuredClone(draft);
   let changed = 0;
+  const fields = [];
 
   next.inputs = (next.inputs || []).map((item) => {
     const textLoc = normalizeLoc(typeof item === "string" ? item : item?.text);
     const text = pickLoc(textLoc);
     let typeId = itemTypeId(item);
-    let conceptId = itemConceptId(item);
     const base =
       typeof item === "string"
-        ? { text: textLoc, typeId: "", conceptId: "" }
-        : { ...item, text: textLoc, typeId, conceptId };
+        ? { text: textLoc, typeId: "" }
+        : { ...item, text: textLoc, typeId };
     if (!text) return base;
-    let localChanged = false;
     if (!typeId) {
       const suggested = suggestInputType(text);
       if (suggested) {
         typeId = suggested;
-        localChanged = true;
+        changed += 1;
+        if (!fields.includes("inputType")) fields.push("inputType");
       }
     }
-    if (!conceptId) {
-      const suggestedConcept = suggestConcept(text);
-      if (suggestedConcept) {
-        conceptId = suggestedConcept;
-        localChanged = true;
-      }
-    }
-    if (localChanged) changed += 1;
-    return { ...base, text: textLoc, typeId, conceptId };
+    return { ...base, text: textLoc, typeId };
   });
 
   next.outputs = (next.outputs || []).map((item) => {
     const textLoc = normalizeLoc(typeof item === "string" ? item : item?.text);
     const text = pickLoc(textLoc);
     let typeId = itemTypeId(item);
-    let conceptId = itemConceptId(item);
     const base =
       typeof item === "string"
-        ? { text: textLoc, typeId: "", conceptId: "" }
-        : { ...item, text: textLoc, typeId, conceptId };
+        ? { text: textLoc, typeId: "" }
+        : { ...item, text: textLoc, typeId };
     if (!text) return base;
-    let localChanged = false;
     if (!typeId) {
       const suggested = suggestOutputType(text);
       if (suggested) {
         typeId = suggested;
-        localChanged = true;
+        changed += 1;
+        if (!fields.includes("outputType")) fields.push("outputType");
       }
     }
-    if (!conceptId) {
-      const suggestedConcept = suggestConcept(text);
-      if (suggestedConcept) {
-        conceptId = suggestedConcept;
-        localChanged = true;
-      }
-    }
-    if (localChanged) changed += 1;
-    return { ...base, text: textLoc, typeId, conceptId };
+    return { ...base, text: textLoc, typeId };
   });
 
   const timeLoc = normalizeLoc(
@@ -354,6 +310,7 @@ export function applySuggestions(draft) {
         amount: parsed.amount,
       };
       changed += 1;
+      fields.push("duration");
     }
   } else if (typeof next.processingTime === "string") {
     next.processingTime = {
@@ -385,6 +342,7 @@ export function applySuggestions(draft) {
         currency: costCurrency || suggested.currency || "EUR",
       };
       changed += 1;
+      fields.push("cost");
     } else {
       next.cost = { text: costLoc, amount: "", currency: costCurrency || "EUR" };
     }
@@ -403,7 +361,8 @@ export function applySuggestions(draft) {
   if (suggestedOrgId && suggestedOrgId !== String(next.orgId || "").trim()) {
     next.orgId = suggestedOrgId;
     changed += 1;
+    fields.push("orgId");
   }
 
-  return { draft: next, changed };
+  return { draft: next, changed, fields };
 }

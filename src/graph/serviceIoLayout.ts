@@ -28,7 +28,6 @@ export type IoNode = {
 export type IoVocabs = {
   inputTypes?: VocabEntry[];
   outputTypes?: VocabEntry[];
-  concepts?: VocabEntry[];
 };
 
 export type IoEdge = {
@@ -212,7 +211,7 @@ function localName(id: string): string {
   return trimmed.slice(Math.max(hash, slash) + 1) || id;
 }
 
-function conceptLabel(
+function typeHeading(
   entries: VocabEntry[] | undefined,
   id: string,
   lang: AppLang,
@@ -223,19 +222,16 @@ function conceptLabel(
   return label;
 }
 
-function ioConceptHeading(
+function ioTypeHeading(
   node: Record<string, unknown>,
   lane: "input" | "output",
   lang: AppLang,
   vocabs?: IoVocabs,
 ): string {
   const typeId = refId(node["dct:type"]) || "";
-  const conceptId = refId(node["cv:supportsConcept"]) || "";
   const typeEntries =
     lane === "input" ? vocabs?.inputTypes : vocabs?.outputTypes;
-  const typeLabel = conceptLabel(typeEntries, typeId, lang);
-  const concept = conceptLabel(vocabs?.concepts, conceptId, lang);
-  return [typeLabel, concept].filter(Boolean).join(" · ");
+  return typeHeading(typeEntries, typeId, lang);
 }
 
 function makeNode(opts: {
@@ -472,7 +468,7 @@ export function buildServiceIoLayout(
 
   const inputCards = inputNodes.map((node, index) => {
     const id = String(node["@id"] || `input-${index}`);
-    const heading = ioConceptHeading(node, "input", lang, vocabs);
+    const heading = ioTypeHeading(node, "input", lang, vocabs);
     const content =
       readLit(node["dct:title"], lang) ||
       readLit(node["cpsv:name"], lang) ||
@@ -494,7 +490,7 @@ export function buildServiceIoLayout(
   });
   const outputCards = outputNodes.map((node, index) => {
     const id = String(node["@id"] || `output-${index}`);
-    const heading = ioConceptHeading(node, "output", lang, vocabs);
+    const heading = ioTypeHeading(node, "output", lang, vocabs);
     const content =
       readLit(node["dct:title"], lang) ||
       readLit(node["cpsv:name"], lang) ||

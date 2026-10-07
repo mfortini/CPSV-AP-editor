@@ -54,8 +54,15 @@
     "copied": "JSON-LD copied.",
     "new": "New sheet.",
     "tooLarge": "Compressed sheet exceeds the URL limit. Use export or copy.",
-    "suggestOk": "Structure suggested: {{count}} field(s) updated.",
+    "suggestOk": "Filled in: {{fields}}.",
     "suggestNone": "No applicable suggestions.",
+    "suggestField": {
+      "inputType": "input type",
+      "outputType": "output type",
+      "duration": "duration",
+      "cost": "cost",
+      "orgId": "organisation URI"
+    },
     "pickService": "Choose which service to edit.",
     "error": "Operation failed."
   },
@@ -88,10 +95,9 @@
     "advanced": "Advanced",
     "ioServiceId": "App IO service id",
     "howTo": "How to",
-    "type": "Type (controlled vocabulary)",
-    "typeHint": "Pick a concept from the OntoPiA service-input-output vocabulary.",
-    "concept": "Semantic concept",
-    "conceptHint": "Optional. Link a CPV-AP_IT (OntoPiA) property to the input/output.",
+    "type": "Document type",
+    "typeHint": "service-input-output controlled vocabulary: identity attestation, application, code, certification and the other defined types.",
+    "suggestHint": "Fills only structured fields that are still empty: document type, duration, cost and organisation URI.",
     "lifeEventsHint": "Controlled vocabulary of life events (life-business-event).",
     "themesHint": "Controlled vocabulary of service themes.",
     "textOptional": "Text (optional)",
@@ -133,7 +139,7 @@
   },
   "vocabs": {
     "heading": "Controlled vocabularies",
-    "hint": "OntoPiA vocabularies used by the editor. In the editor you can select them in Type, Concept, Life events and Themes fields.",
+    "hint": "Vocabularies used by the editor. In the editor you can select them in Document type, Life events and Themes fields.",
     "panelIntro": "Controlled vocabularies provide shared, interoperable values (stable URIs) instead of free text.",
     "controlled": "Controlled vocabulary",
     "search": "Filter by label or URI",
@@ -152,15 +158,7 @@
     "inputTypes": "Input types",
     "inputTypesHint": "Document/requirement types needed to access the service.",
     "outputTypes": "Output types",
-    "outputTypesHint": "Types of results or documents produced by the service.",
-    "concepts": "Concepts",
-    "conceptsHint": "Properties from the CPV-AP_IT (person) ontology on Schema.gov.it, linkable to inputs and outputs.",
-    "conceptsSource": {
-      "sparql": "Source: Schema.gov.it SPARQL (CPV-AP_IT).",
-      "ttl": "Source: CPV-AP_IT ontology from GitHub (fallback).",
-      "cache": "Source: session cache (CPV-AP_IT)."
-    },
-    "conceptsSourceLocal": "Reduced offline list: local fallback concepts only."
+    "outputTypesHint": "Types of results or documents produced by the service."
   },
   "paste": {
     "title": "Paste JSON-LD",

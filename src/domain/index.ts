@@ -1,4 +1,4 @@
-import type { Draft, JsonLdDocument } from "./types";
+import type { Draft, JsonLdDocument, SuggestionField } from "./types";
 import * as model from "./schedaModel";
 import * as suggest from "./schedaSuggest";
 
@@ -36,4 +36,5 @@ export const labelMapEntries = model.labelMapEntries as (
 export const applySuggestions = suggest.applySuggestions as (draft: Draft) => {
   draft: Draft;
   changed: number;
+  fields: SuggestionField[];
 };

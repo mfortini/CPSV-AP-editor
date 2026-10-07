@@ -95,7 +95,6 @@ export function GraphView() {
       buildServiceIoLayout(document, lang, {
         inputTypes: vocabs?.inputTypes,
         outputTypes: vocabs?.outputTypes,
-        concepts: vocabs?.concepts,
       }),
     [document, lang, vocabs],
   );

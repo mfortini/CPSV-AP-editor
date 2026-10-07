@@ -46,12 +46,13 @@ describe("IPA org id", () => {
   });
 
   it("applies IPA suggestion with structure button", () => {
-    const { draft, changed } = applySuggestions({
+    const { draft, changed, fields } = applySuggestions({
       ...emptyDraft(),
       orgId: "c_h501",
       orgName: { it: "Comune di Roma", en: "Municipality of Rome" },
     });
     expect(changed).toBeGreaterThan(0);
     expect(draft.orgId).toBe("http://indicepa.gov.it/pa/c_h501");
+    expect(fields).toContain("orgId");
   });
 });

@@ -64,18 +64,16 @@ function formatCost(cost: Cost, lang: AppLang, t: (key: string) => string): stri
 function TypedList({
   items,
   typeEntries,
-  conceptEntries,
   lang,
   t,
 }: {
   items: TypedItem[];
   typeEntries: Parameters<typeof findVocabLabel>[0];
-  conceptEntries: Parameters<typeof findVocabLabel>[0];
   lang: AppLang;
   t: (key: string) => string;
 }) {
   const rows = (items || []).filter(
-    (item) => locHasContent(item.text) || item.typeId || item.conceptId,
+    (item) => locHasContent(item.text) || item.typeId,
   );
   if (!rows.length) return null;
   return (
@@ -85,9 +83,6 @@ function TypedList({
         const typeLabel = item.typeId
           ? findVocabLabel(typeEntries, item.typeId, lang)
           : "";
-        const conceptLabel = item.conceptId
-          ? findVocabLabel(conceptEntries, item.conceptId, lang)
-          : "";
         return (
           <li key={`${text}-${index}`}>
             {text ? <div className="preview-card__item-text">{text}</div> : null}
@@ -96,14 +91,6 @@ function TypedList({
                 <strong>{t("form.type")}:</strong>{" "}
                 <a href={item.typeId} target="_blank" rel="noopener noreferrer">
                   {typeLabel}
-                </a>
-              </p>
-            ) : null}
-            {conceptLabel ? (
-              <p className="preview-card__item-meta">
-                <strong>{t("form.concept")}:</strong>{" "}
-                <a href={item.conceptId} target="_blank" rel="noopener noreferrer">
-                  {conceptLabel}
                 </a>
               </p>
             ) : null}
@@ -140,10 +127,10 @@ export function SheetPreview() {
   const processingLabel = formatProcessing(draft.processingTime, lang, t);
   const costLabel = formatCost(draft.cost, lang, t);
   const hasInputs = (draft.inputs || []).some(
-    (item) => locHasContent(item.text) || item.typeId || item.conceptId,
+    (item) => locHasContent(item.text) || item.typeId,
   );
   const hasOutputs = (draft.outputs || []).some(
-    (item) => locHasContent(item.text) || item.typeId || item.conceptId,
+    (item) => locHasContent(item.text) || item.typeId,
   );
   const onlineUrls = (draft.onlineUrls || []).filter(Boolean);
   const hasChannels = Boolean(draft.pageUrl || onlineUrls.length);
@@ -196,7 +183,6 @@ export function SheetPreview() {
           <TypedList
             items={draft.inputs}
             typeEntries={vocabs?.inputTypes}
-            conceptEntries={vocabs?.concepts}
             lang={lang}
             t={t}
           />
@@ -220,7 +206,6 @@ export function SheetPreview() {
           <TypedList
             items={draft.outputs}
             typeEntries={vocabs?.outputTypes}
-            conceptEntries={vocabs?.concepts}
             lang={lang}
             t={t}
           />
